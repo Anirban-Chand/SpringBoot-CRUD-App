@@ -5,6 +5,7 @@ import com.example.firstproject.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -21,7 +22,7 @@ public class PersonController {
     }
 
     @PostMapping
-    public void addPerson(@RequestBody Person person) {
+    public void addPerson(@Valid @RequestBody Person person) {
         personService.addPerson(person);
     }
 
@@ -42,7 +43,7 @@ public class PersonController {
 
     @PutMapping("{id}")
     public int updatePerson(@PathVariable("id") UUID id,
-                            @RequestBody Person updatedPerson) {
+                            @Valid @RequestBody Person updatedPerson) {
         return personService.updatePerson(id, updatedPerson);
     }
 }
